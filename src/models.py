@@ -1,36 +1,7 @@
-"""
-Module containing models and metrics for Airbnb project
-
-Classes:
-    - LinearRegression: Linear Regression model
-    - Lasso: Lasso Regression with L1 regularization
-    - KFold: K-Fold cross-validator
-
-Functions:
-    - r2_score: Calculate R² score
-    - rmse_score: Calculate RMSE
-    - mae_score: Calculate MAE
-    - evaluate_model: Evaluate model with multiple metrics
-    - cross_validate: Cross-validation for model
-"""
-
 import numpy as np
 
-
-# ============================================================================
 # REGRESSION MODELS
-# ============================================================================
-
 class LinearRegression:
-    """
-    Linear Regression model following scikit-learn API
-    
-    Parameters:
-    -----------
-    fit_intercept : bool, default=True
-        Whether to calculate the intercept for this model
-    """
-    
     def __init__(self, fit_intercept=True):
         self.fit_intercept = fit_intercept
         self.coef_ = None
@@ -84,24 +55,8 @@ class LinearRegression:
         """
         return X @ self.coef_ + self.intercept_
 
-
+# LASSO 
 class Lasso:
-    """
-    Lasso Regression model using Coordinate Descent
-    Following scikit-learn API
-    
-    Parameters:
-    -----------
-    alpha : float, default=1.0
-        Regularization parameter
-    fit_intercept : bool, default=True
-        Whether to calculate the intercept
-    max_iter : int, default=1000
-        Maximum number of iterations
-    tol : float, default=1e-4
-        Tolerance for stopping criterion
-    """
-    
     def __init__(self, alpha=1.0, fit_intercept=True, max_iter=1000, tol=1e-4):
         self.alpha = alpha
         self.fit_intercept = fit_intercept
@@ -195,24 +150,9 @@ class Lasso:
         return X @ self.coef_ + self.intercept_
 
 
-# ============================================================================
-# CROSS-VALIDATION
-# ============================================================================
 
+# CROSS-VALIDATION
 class KFold:
-    """
-    K-Fold cross-validator following scikit-learn API
-    
-    Parameters:
-    -----------
-    n_splits : int, default=5
-        Number of folds
-    shuffle : bool, default=True
-        Whether to shuffle data before splitting
-    random_state : int, default=42
-        Random seed for reproducibility
-    """
-    
     def __init__(self, n_splits=5, shuffle=True, random_state=42):
         self.n_splits = n_splits
         self.shuffle = shuffle
@@ -254,10 +194,7 @@ class KFold:
             current = stop
 
 
-# ============================================================================
 # METRICS
-# ============================================================================
-
 def r2_score(y_true, y_pred):
     """
     Calculate R² score (Coefficient of Determination)

@@ -34,27 +34,10 @@ def read_csv(file_path):
 
 
 def write_csv(file_path, data, column_names):
-    """
-    Write data to CSV file
-    
-    Parameters:
-    -----------
-    file_path : str
-        Path to the CSV file to write
-    data : numpy.ndarray
-        2D data array
-    column_names : numpy.ndarray or list
-        Column names
-    """
-    # Combine header and data
     data_with_header = np.vstack([column_names, data])
     
-    # Save file with comma delimiter
     np.savetxt(file_path, data_with_header, fmt='%s', delimiter=',', encoding='utf-8')
     
     print(f"Saved data to: {file_path}")
     print(f"Shape: {data.shape}")
     print(f"Number of columns: {len(column_names)}")
-
-
-
