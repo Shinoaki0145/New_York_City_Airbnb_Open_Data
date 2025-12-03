@@ -55,11 +55,11 @@ Dưới đây là một số biểu đồ quan trọng từ quá trình khám ph
 
 #### a. Phân phối giá (Price Distribution)
 Phần lớn các listing có giá dưới $200/đêm. Biểu đồ bên dưới hiển thị phân phối giá cho các căn hộ <= $500.
-![Price Distribution](images/4.png)
+![Price Distribution](https://github.com/user-attachments/assets/2d8bf7ec-274a-47bf-acfc-26a86090b8b8)
 
 #### b. Phân bố địa lý (Geographic Distribution)
 Các listing tập trung dày đặc tại Manhattan và Brooklyn. Màu sắc thể hiện mức giá (đỏ/vàng là giá cao).
-![Geographic Map](images/12.png)
+![Geographic Map](https://github.com/user-attachments/assets/5d263ddb-1902-49ce-ae12-2149b2996e70)
 
 #### c. Giá theo loại phòng (Price by Room Type)
 "Entire home/apt" có mức giá cao nhất và biến động lớn nhất, trong khi "Shared room" có giá thấp nhất.
