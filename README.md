@@ -63,23 +63,23 @@ Các listing tập trung dày đặc tại Manhattan và Brooklyn. Màu sắc th
 
 #### c. Giá theo loại phòng (Price by Room Type)
 "Entire home/apt" có mức giá cao nhất và biến động lớn nhất, trong khi "Shared room" có giá thấp nhất.
-![Room Type Price](images/11.png)
+![Room Type Price](https://github.com/user-attachments/assets/0298e07b-d4ad-4f90-b708-1a35e271b7cc)
 
 #### d. Sự thống trị thị trường (Market Domination)
 Một số khu vực tại Manhattan bị chi phối mạnh mẽ bởi các "Top Hosts" (những người quản lý nhiều listing), cho thấy tính chất thương mại hóa cao.
-![Market Domination](images/18.png)
+![Market Domination](https://github.com/user-attachments/assets/7305d0af-4232-489a-b23d-4809963fa2b3)
 
 #### e. Tương quan biến số (Correlation Matrix)
 Biểu đồ nhiệt thể hiện mối tương quan giữa các biến số. Các biến số ít có sự tương quan tuyến tính mạnh với nhau, ngoại trừ `number_of_reviews` và `reviews_per_month`.
-![Correlation Matrix](images/13.png)
+![Correlation Matrix](https://github.com/user-attachments/assets/94387759-4e55-4235-8006-a49fe78d30e0)
 
 #### f. Phân bố mật độ giá theo khu vực (Price Density by Neighbourhood)
 Biểu đồ Violin cho thấy mật độ phân phối giá tại Manhattan rộng hơn và có đuôi dài hơn (nhiều listing giá cao) so với các quận khác như Queens hay Bronx.
-![Price Density](images/8.png)
+![Price Density](https://github.com/user-attachments/assets/bf13fc82-f30e-4362-b116-e45bae0cbae2)
 
 #### g. Từ khóa phổ biến trong tên listing (Top Words)
 Các từ khóa xuất hiện nhiều nhất trong tên phòng thường liên quan đến vị trí ("Manhattan", "Brooklyn", "Williamsburg") và đặc điểm phòng ("Private", "Room", "Cozy", "Spacious").
-![Top Words](images/23.png)
+![Top Words](https://github.com/user-attachments/assets/c821cc1e-d9d9-4a11-9b42-72af35a0a4da)
 
 ---
 
@@ -199,21 +199,21 @@ Kết quả đánh giá trên tập Test (20% dữ liệu) sau khi tối ưu hó
 
 #### a. Cross-Validation Scores
 Biểu đồ cho thấy sự ổn định của mô hình qua 5 lần chia dữ liệu (5-fold CV).
-![CV Scores](images/24.png)
+![CV Scores](https://github.com/user-attachments/assets/f71ab478-6854-472d-a549-b135a4f1830c)
 
 #### b. Actual vs Predicted
 Biểu đồ phân tán giữa giá thực tế và giá dự đoán. Các điểm tập trung quanh đường chéo đỏ ($y=x$) cho thấy độ chính xác khá tốt, tuy nhiên mô hình có xu hướng dự đoán thấp hơn thực tế ở phân khúc giá rất cao (luxury).
-![Actual vs Predicted](images/25.png)
+![Actual vs Predicted](https://github.com/user-attachments/assets/b487f265-cc7f-4569-bba0-bf6caebe14ce)
 
 #### c. Residuals Analysis
 Phân phối của phần dư (Residuals) gần chuẩn (Normal distribution) và tập trung quanh 0, cho thấy mô hình không bị bias lớn.
-![Residuals](images/26.png)
+![Residuals](https://github.com/user-attachments/assets/b24f9641-6710-4274-b1d1-db430658c90c)
 
 #### d. Feature Importance
 Các yếu tố ảnh hưởng mạnh nhất đến giá phòng.
 - **Tăng giá:** Entire home/apt, Manhattan, các khu vực đắt đỏ.
 - **Giảm giá:** Shared room, Bronx, các khu vực xa trung tâm.
-![Feature Importance](images/27.png)
+![Feature Importance](https://github.com/user-attachments/assets/7740c7e8-a43f-4cf6-a8cc-b1f17e26386d)
 
 ### 3. So sánh và phân tích
 
