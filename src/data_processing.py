@@ -35,26 +35,26 @@ def read_csv(file_path):
 
 def write_csv(file_path, data, column_names):
     """
-    Ghi dữ liệu ra file CSV
+    Write data to CSV file
     
     Parameters:
     -----------
     file_path : str
-        Đường dẫn file CSV cần ghi
+        Path to the CSV file to write
     data : numpy.ndarray
-        Mảng dữ liệu 2D
-    column_names : numpy.ndarray hoặc list
-        Tên các cột
+        2D data array
+    column_names : numpy.ndarray or list
+        Column names
     """
-    # Ghép header và data
+    # Combine header and data
     data_with_header = np.vstack([column_names, data])
     
-    # Lưu file với delimiter là dấu phẩy
+    # Save file with comma delimiter
     np.savetxt(file_path, data_with_header, fmt='%s', delimiter=',', encoding='utf-8')
     
-    print(f"Đã lưu dữ liệu vào: {file_path}")
+    print(f"Saved data to: {file_path}")
     print(f"Shape: {data.shape}")
-    print(f"Số cột: {len(column_names)}")
+    print(f"Number of columns: {len(column_names)}")
 
 
 

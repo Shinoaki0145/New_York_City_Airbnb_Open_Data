@@ -10,7 +10,7 @@ plt.rcParams['lines.solid_capstyle'] = 'butt'
 
 def plot_missing_values(data, column_names, target_columns, title='Missing Values'):
     """
-    Vẽ biểu đồ missing values (Đã sửa lỗi hiển thị: Tự động scale theo dữ liệu thực tế)
+    Plot missing values chart (Fixed display: Auto-scale based on actual data)
     """
     missing_counts = []
     cols_with_missing = []
@@ -19,13 +19,12 @@ def plot_missing_values(data, column_names, target_columns, title='Missing Value
         if col_name in column_names:
             col_idx = np.where(column_names == col_name)[0][0]
             col_data = data[:, col_idx]
-            # Đếm None, nan, hoặc chuỗi rỗng
-            missing = np.sum((col_data == '') | (col_data == 'None') | (col_data == 'nan'))
+            missing = np.sum(col_data == '')
             missing_counts.append(missing)
             cols_with_missing.append(col_name)
     
     if len(missing_counts) == 0:
-        print(f"Không có giá trị thiếu trong các cột: {target_columns}")
+        print(f"No missing values in columns: {target_columns}")
         return
 
     missing_counts = np.array(missing_counts)
@@ -46,7 +45,7 @@ def plot_missing_values(data, column_names, target_columns, title='Missing Value
     )
     
     ax.set_title(title)
-    ax.set_xlabel('Số lượng giá trị thiếu')
+    ax.set_xlabel('Number of missing values')
 
     if max_missing > 0:
         ax.set_xlim(0, max_missing * 1.15)
@@ -56,7 +55,7 @@ def plot_missing_values(data, column_names, target_columns, title='Missing Value
         if width > 0: 
             percent = (width / total_rows * 100)
             ax.text(width + (max_missing * 0.01), p.get_y() + p.get_height()/2, 
-                    f'{int(width):,} ({percent:.2f}%)', 
+                    f'{int(width):,} ({percent:.3f}%)', 
                     va='center', fontsize=10, fontweight='bold', color='black')
     
     plt.show()
@@ -64,7 +63,7 @@ def plot_missing_values(data, column_names, target_columns, title='Missing Value
 
 def plot_distribution(data, column_name, bins=50, title=None):
     """
-    Vẽ phân phối và boxplot (Đồng bộ Seaborn hoàn toàn)
+    Plot distribution and boxplot (Fully synchronized with Seaborn)
     """
     data_clean = data[~np.isnan(data)]
     
@@ -82,8 +81,8 @@ def plot_distribution(data, column_name, bins=50, title=None):
 
     mean_val = np.mean(data_clean)
     median_val = np.median(data_clean)
-    axes[0].axvline(mean_val, color='crimson', linestyle='--', linewidth=1.5, label=f'Mean: {mean_val:.2f}')
-    axes[0].axvline(median_val, color='green', linestyle='-', linewidth=1.5, label=f'Median: {median_val:.2f}')
+    axes[0].axvline(mean_val, color='crimson', linestyle='--', linewidth=1.5, label=f'Mean: {mean_val:.3f}')
+    axes[0].axvline(median_val, color='green', linestyle='-', linewidth=1.5, label=f'Median: {median_val:.3f}')
     
     axes[0].set_title(title if title else f"{column_name} Distribution")
     axes[0].legend()
@@ -118,7 +117,7 @@ def plot_distribution(data, column_name, bins=50, title=None):
 
 def plot_categorical_distribution(data, column_name, top_n=20):
     """
-    Vẽ biểu đồ phân phối biến phân loại (Seaborn style)
+    Plot categorical variable distribution (Seaborn style)
     """
     unique, counts = np.unique(data, return_counts=True)
     
@@ -132,8 +131,8 @@ def plot_categorical_distribution(data, column_name, top_n=20):
     
     plt.xticks(rotation=45, ha='right')
     plt.xlabel(column_name)
-    plt.ylabel('Số lượng')
-    plt.title(f'Phân phối của {column_name} (Top {top_n}) - Bar Chart')
+    plt.ylabel('Count')
+    plt.title(f'Distribution of {column_name} (Top {top_n}) - Bar Chart')
     plt.tight_layout()
     plt.show()
     
@@ -152,29 +151,29 @@ def plot_categorical_distribution(data, column_name, top_n=20):
     )
     
     plt.setp(autotexts, size=9, weight="bold", color="black")
-    plt.title(f'Tỷ lệ % của {column_name} (Top {top_n}) - Pie Chart', pad=20)
+    plt.title(f'Percentage of {column_name} (Top {top_n}) - Pie Chart', pad=20)
     plt.tight_layout()
     plt.show()
 
 
 def plot_correlation_heatmap(data, column_names, figsize=(12, 10)):
     """
-    Vẽ heatmap (Đã là Seaborn, giữ nguyên nhưng chỉnh lại style một chút)
+    Plot correlation heatmap (Already using Seaborn, keeping but adjusting style)
     """
     correlation_matrix = np.corrcoef(data, rowvar=False)
     
     plt.figure(figsize=figsize)
-    sns.heatmap(correlation_matrix, annot=True, fmt='.2f', cmap='coolwarm', 
+    sns.heatmap(correlation_matrix, annot=True, fmt='.3f', cmap='coolwarm', 
                 center=0, square=True, linewidths=1, 
                 xticklabels=column_names, yticklabels=column_names)
-    plt.title('Ma trận tương quan', pad=20)
+    plt.title('Correlation Matrix', pad=20)
     plt.tight_layout()
     plt.show()
 
 
 def plot_price_by_category(categories, prices, category_name, top_n=10):
     """
-    Vẽ biểu đồ giá trung bình (Chuyển sang Seaborn Barplot)
+    Plot average price chart (Using Seaborn Barplot)
     """
     unique_cats = np.unique(categories)
     avg_prices = []
@@ -194,14 +193,14 @@ def plot_price_by_category(categories, prices, category_name, top_n=10):
     
     ax = sns.barplot(x=top_prices, y=top_cats, hue=top_cats, palette="Blues_r", legend=False)
     
-    ax.set_xlabel('Giá trung bình ($)')
+    ax.set_xlabel('Average Price ($)')
     ax.set_ylabel(category_name)
-    ax.set_title(f'Giá trung bình theo {category_name} (Top {top_n})')
+    ax.set_title(f'Average Price by {category_name} (Top {top_n})')
 
     for i, p in enumerate(ax.patches):
         width = p.get_width()
         ax.text(width + 1, p.get_y() + p.get_height()/2,
-                f'${top_prices[i]:.2f}',
+                f'${top_prices[i]:.3f}',
                 va='center', fontsize=10, fontweight='bold')
     
     plt.tight_layout()
@@ -210,14 +209,14 @@ def plot_price_by_category(categories, prices, category_name, top_n=10):
 
 def plot_price_density_by_neighbourhood(neighbourhood_groups, prices):
     """
-    Vẽ violin plot phân phối giá theo neighbourhood group
+    Plot violin plot of price distribution by neighbourhood group
     
     Parameters:
     -----------
     neighbourhood_groups : numpy.ndarray
-        Mảng các neighbourhood groups
+        Array of neighbourhood groups
     prices : numpy.ndarray
-        Mảng giá (đã được filter trước khi truyền vào)
+        Array of prices (already filtered before passing)
     """
     mask = ~np.isnan(prices)
     prices_clean = prices[mask]
@@ -241,7 +240,7 @@ def plot_price_density_by_neighbourhood(neighbourhood_groups, prices):
     ax.set_xticklabels(unique_groups)
     ax.set_xlabel('Neighbourhood Group', fontsize=12, fontweight='bold')
     ax.set_ylabel('Price', fontsize=12, fontweight='bold')
-    ax.set_title('Phân phối mật độ giá theo khu vực', fontsize=14, fontweight='bold')
+    ax.set_title('Price Density Distribution by Neighbourhood', fontsize=14, fontweight='bold')
     ax.legend(loc='upper right', fontsize=11)
     
     plt.tight_layout()
@@ -249,20 +248,20 @@ def plot_price_density_by_neighbourhood(neighbourhood_groups, prices):
 
 
 def plot_geographical_distribution(lon_data, lat_data, color_data=None, 
-                                   title='Phân phối địa lý'):
+                                   title='Geographical Distribution'):
     """
-    Vẽ scatter plot địa lý
+    Plot geographical scatter plot
     
     Parameters:
     -----------
     lon_data : numpy.ndarray
-        Mảng longitude
+        Array of longitude values
     lat_data : numpy.ndarray
-        Mảng latitude
+        Array of latitude values
     color_data : numpy.ndarray
-        Mảng dữ liệu để tô màu (optional, đã được filter trước khi truyền vào)
+        Data array for coloring (optional, already filtered before passing)
     title : str
-        Tiêu đề biểu đồ
+        Plot title
     """
     if color_data is not None:
         mask = (~np.isnan(lon_data)) & (~np.isnan(lat_data)) & (~np.isnan(color_data))
@@ -292,7 +291,7 @@ def plot_geographical_distribution(lon_data, lat_data, color_data=None,
 
 def plot_room_type_by_neighbourhood(neighbourhood_groups, room_types, prices):
     """
-    Vẽ bar chart phân loại phòng (Đồng bộ Seaborn Countplot)
+    Plot bar chart of room type distribution (Synchronized with Seaborn Countplot)
     """
     mask = ~np.isnan(prices)
     neighbourhood_clean = neighbourhood_groups[mask]
@@ -314,10 +313,10 @@ def plot_room_type_by_neighbourhood(neighbourhood_groups, room_types, prices):
         
         ax.set_title(neighbourhood)
         ax.set_xlabel('')
-        ax.set_ylabel('Số lượng' if idx == 0 else '')
+        ax.set_ylabel('Count' if idx == 0 else '')
         ax.tick_params(axis='x', rotation=45)
         
-        # Thêm số lượng trên đỉnh cột
+        # Add count on top of bars
         for p in ax.patches:
             height = p.get_height()
             if not np.isnan(height):
@@ -325,14 +324,14 @@ def plot_room_type_by_neighbourhood(neighbourhood_groups, room_types, prices):
                         f'{int(height)}',
                         ha='center', va='bottom', fontsize=9, fontweight='bold')
 
-    fig.suptitle('Phân bố loại phòng theo khu vực', fontsize=16, y=1.05)
+    fig.suptitle('Room Type Distribution by Neighbourhood', fontsize=16, y=1.05)
     plt.tight_layout()
     plt.show()
 
 
 def plot_top_expensive_neighbourhoods(neighbourhoods, prices, top_n=10, most_expensive=True):
     """
-    Vẽ top neighbourhoods (Chuyển sang Seaborn Barplot)
+    Plot top neighbourhoods (Using Seaborn Barplot)
     """
     mask = (~np.isnan(prices)) & (prices > 0)
     prices_clean = prices[mask]
@@ -350,11 +349,11 @@ def plot_top_expensive_neighbourhoods(neighbourhoods, prices, top_n=10, most_exp
     
     if most_expensive:
         sorted_indices = np.argsort(avg_prices)[::-1][:top_n]
-        title = f'Top {top_n} Khu vực đắt đỏ nhất'
+        title = f'Top {top_n} Most Expensive Neighbourhoods'
         palette = 'Reds_r'
     else:
         sorted_indices = np.argsort(avg_prices)[:top_n]
-        title = f'Top {top_n} Khu vực rẻ nhất'
+        title = f'Top {top_n} Cheapest Neighbourhoods'
         palette = 'Greens_r'
     
     top_neighbourhoods = unique_neighbourhoods[sorted_indices]
@@ -364,13 +363,13 @@ def plot_top_expensive_neighbourhoods(neighbourhoods, prices, top_n=10, most_exp
     
     ax = sns.barplot(x=top_prices, y=top_neighbourhoods, hue=top_neighbourhoods, palette=palette, legend=False)
     
-    ax.set_xlabel('Giá trung bình ($)')
+    ax.set_xlabel('Average Price ($)')
     ax.set_title(title)
     
     for i, p in enumerate(ax.patches):
         width = p.get_width()
         ax.text(width + 1, p.get_y() + p.get_height()/2,
-                f'${top_prices[i]:.2f}',
+                f'${top_prices[i]:.3f}',
                 va='center', fontsize=10, fontweight='bold')
     
     plt.tight_layout()
@@ -379,7 +378,7 @@ def plot_top_expensive_neighbourhoods(neighbourhoods, prices, top_n=10, most_exp
 
 def plot_price_distribution_by_room_type(room_types, prices, max_price=500):
     """
-    Vẽ phân phối giá theo loại phòng (Seaborn Violinplot)
+    Plot price distribution by room type (Seaborn Violinplot)
     """
     mask = (~np.isnan(prices)) & (prices <= max_price) & (prices > 0)
     prices_clean = prices[mask]
@@ -400,9 +399,9 @@ def plot_price_distribution_by_room_type(room_types, prices, max_price=500):
     
     ax.set_xticks(np.arange(len(unique_types)))
     ax.set_xticklabels(unique_types)
-    ax.set_xlabel('Loại phòng', fontsize=12, fontweight='bold')
-    ax.set_ylabel('Giá ($)', fontsize=12, fontweight='bold')
-    ax.set_title('Phân phối giá theo loại phòng', fontsize=14, fontweight='bold')
+    ax.set_xlabel('Room Type', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Price ($)', fontsize=12, fontweight='bold')
+    ax.set_title('Price Distribution by Room Type', fontsize=14, fontweight='bold')
     ax.legend(loc='upper right', fontsize=11)
     
     plt.tight_layout()
@@ -411,7 +410,7 @@ def plot_price_distribution_by_room_type(room_types, prices, max_price=500):
 
 def plot_top_hosts(host_ids, host_names, top_n=15):
     """
-    Vẽ top hosts (Chuyển sang Seaborn Barplot)
+    Plot top hosts (Using Seaborn Barplot)
     """
     unique_hosts, counts = np.unique(host_ids, return_counts=True)
     
@@ -429,8 +428,8 @@ def plot_top_hosts(host_ids, host_names, top_n=15):
 
     ax = sns.barplot(x=top_counts, y=top_names, hue=top_names, palette="Oranges_r", legend=False)
     
-    ax.set_xlabel('Số lượng listings')
-    ax.set_title(f'Top {top_n} Hosts có nhiều listings nhất')
+    ax.set_xlabel('Number of Listings')
+    ax.set_title(f'Top {top_n} Hosts with Most Listings')
     
     for i, p in enumerate(ax.patches):
         width = p.get_width()
@@ -444,17 +443,17 @@ def plot_top_hosts(host_ids, host_names, top_n=15):
 
 def plot_top_words_name(data, column_names, top_n=10):
     """
-    Hàm chuẩn hóa: Sử dụng logic làm sạch mạnh (isalnum) của hàm A 
-    và giao diện Seaborn đẹp của hàm B.
+    Standardized function: Using strong cleaning logic (isalnum) from function A 
+    and beautiful Seaborn interface from function B.
     """
-    # 1. Lấy dữ liệu cột name
+    # 1. Get data from name column
     if 'name' not in column_names:
-        print("Không tìm thấy cột 'name'.")
+        print("Column 'name' not found.")
         return
     col_idx = np.where(column_names == 'name')[0][0]
     names_data = data[:, col_idx]
 
-    # 2. Định nghĩa Stopwords (Kết hợp đầy đủ)
+    # 2. Define Stopwords (Complete combination)
     stopwords = {
         'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
         'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be',
@@ -463,22 +462,22 @@ def plot_top_words_name(data, column_names, top_n=10):
         'it', 'this', 'that', 'these', 'those', 'if', 'so', 'my', 'very', 
         'your'
     }
-    # Lưu ý: Nếu bạn muốn đếm cả từ 'room', hãy xóa nó khỏi set trên.
+    # Note: If you want to count the word 'room', remove it from the set above.
     
     word_counts = {}
     
-    # 3. Xử lý đếm từ (Logic tối ưu của Hàm A)
+    # 3. Process word counting (Optimized logic from Function A)
     for name in names_data:
-        # Xử lý NaN/None an toàn
+        # Handle NaN/None safely
         s_name = str(name)
         if s_name.lower() in ['nan', 'none', '']:
             continue
             
-        # Chuyển thường
+        # Convert to lowercase
         name_lower = s_name.lower()
         
-        # Làm sạch kỹ: Chỉ giữ chữ cái và số, còn lại thay bằng khoảng trắng
-        # Cách này loại bỏ được cả Emoji và ký tự lạ
+        # Thorough cleaning: Keep only letters and numbers, replace rest with spaces
+        # This removes emojis and special characters
         name_clean = ""
         for char in name_lower:
             if char.isalnum():
@@ -486,36 +485,36 @@ def plot_top_words_name(data, column_names, top_n=10):
             else:
                 name_clean += " "
         
-        # Tách từ
+        # Split words
         words = name_clean.split()
         
         for w in words:
             if len(w) > 1 and w not in stopwords:
                 word_counts[w] = word_counts.get(w, 0) + 1
                 
-    # 4. Sắp xếp Top N
+    # 4. Sort Top N
     sorted_words = sorted(word_counts.items(), key=lambda item: item[1], reverse=True)
     top_list = sorted_words[:top_n]
     
     if not top_list:
-        print("Không tìm thấy từ nào.")
+        print("No words found.")
         return
         
     labels = [item[0] for item in top_list]
     values = [item[1] for item in top_list]
     
-    # 5. Vẽ biểu đồ (Style Seaborn đồng bộ)
+    # 5. Plot chart (Synchronized Seaborn style)
     fig, ax = plt.subplots(figsize=(12, 6), constrained_layout=True)
     
-    # Vẽ
+    # Plot
     sns.barplot(x=labels, y=values, hue=labels, palette='viridis', legend=False, ax=ax)
     
-    ax.set_title(f'Top {top_n} từ phổ biến nhất trong tên Listing (Đã lọc kỹ)', 
+    ax.set_title(f'Top {top_n} Most Common Words in Listing Names (Thoroughly Filtered)', 
                  fontsize=14, fontweight='bold')
-    ax.set_xlabel('Từ vựng', fontsize=12)
-    ax.set_ylabel('Số lần xuất hiện', fontsize=12)
+    ax.set_xlabel('Words', fontsize=12)
+    ax.set_ylabel('Frequency', fontsize=12)
     
-    # Thêm số liệu
+    # Add values
     max_val = max(values)
     ax.set_ylim(0, max_val * 1.15)
     
