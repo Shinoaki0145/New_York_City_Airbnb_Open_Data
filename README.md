@@ -55,31 +55,31 @@ Dưới đây là một số biểu đồ quan trọng từ quá trình khám ph
 
 #### a. Phân phối giá (Price Distribution)
 Phần lớn các listing có giá dưới $200/đêm. Biểu đồ bên dưới hiển thị phân phối giá cho các căn hộ <= $500.
-![Price Distribution](https://github.com/user-attachments/assets/2d8bf7ec-274a-47bf-acfc-26a86090b8b8)
+![Price Distribution](https://github.com/user-attachments/assets/4f8b7910-e4ca-497e-8e84-5582e8443ca9)
 
 #### b. Phân bố địa lý (Geographic Distribution)
 Các listing tập trung dày đặc tại Manhattan và Brooklyn. Màu sắc thể hiện mức giá (đỏ/vàng là giá cao).
-![Geographic Map](https://github.com/user-attachments/assets/5d263ddb-1902-49ce-ae12-2149b2996e70)
+![Geographic Map](https://github.com/user-attachments/assets/8c8a41a7-56cf-4c81-9d52-50d040a6874b)
 
 #### c. Giá theo loại phòng (Price by Room Type)
 "Entire home/apt" có mức giá cao nhất và biến động lớn nhất, trong khi "Shared room" có giá thấp nhất.
-![Room Type Price](https://github.com/user-attachments/assets/0298e07b-d4ad-4f90-b708-1a35e271b7cc)
+![Room Type Price](https://github.com/user-attachments/assets/42bbe49a-5a73-4f8c-a59b-2f38d1a5b526)
 
 #### d. Sự thống trị thị trường (Market Domination)
 Một số khu vực tại Manhattan bị chi phối mạnh mẽ bởi các "Top Hosts" (những người quản lý nhiều listing), cho thấy tính chất thương mại hóa cao.
-![Market Domination](https://github.com/user-attachments/assets/7305d0af-4232-489a-b23d-4809963fa2b3)
+![Market Domination](https://github.com/user-attachments/assets/e13c2e0e-0661-4e6e-bb5e-9fb1a4ca396a)
 
 #### e. Tương quan biến số (Correlation Matrix)
 Biểu đồ nhiệt thể hiện mối tương quan giữa các biến số. Các biến số ít có sự tương quan tuyến tính mạnh với nhau, ngoại trừ `number_of_reviews` và `reviews_per_month`.
-![Correlation Matrix](https://github.com/user-attachments/assets/94387759-4e55-4235-8006-a49fe78d30e0)
+![Correlation Matrix](https://github.com/user-attachments/assets/4ee7229f-84cb-40af-9e73-83ded285fcad)
 
 #### f. Phân bố mật độ giá theo khu vực (Price Density by Neighbourhood)
 Biểu đồ Violin cho thấy mật độ phân phối giá tại Manhattan rộng hơn và có đuôi dài hơn (nhiều listing giá cao) so với các quận khác như Queens hay Bronx.
-![Price Density](https://github.com/user-attachments/assets/bf13fc82-f30e-4362-b116-e45bae0cbae2)
+![Price Density](https://github.com/user-attachments/assets/ec487221-866c-4d91-ab99-91ed04eb5626)
 
 #### g. Từ khóa phổ biến trong tên listing (Top Words)
 Các từ khóa xuất hiện nhiều nhất trong tên phòng thường liên quan đến vị trí ("Manhattan", "Brooklyn", "Williamsburg") và đặc điểm phòng ("Private", "Room", "Cozy", "Spacious").
-![Top Words](https://github.com/user-attachments/assets/c821cc1e-d9d9-4a11-9b42-72af35a0a4da)
+![Top Words](https://github.com/user-attachments/assets/253666d1-f7df-4336-99bf-0f9564857e9a)
 
 ---
 
@@ -199,21 +199,21 @@ Kết quả đánh giá trên tập Test (20% dữ liệu) sau khi tối ưu hó
 
 #### a. Cross-Validation Scores
 Biểu đồ cho thấy sự ổn định của mô hình qua 5 lần chia dữ liệu (5-fold CV).
-![CV Scores](https://github.com/user-attachments/assets/f71ab478-6854-472d-a549-b135a4f1830c)
+![CV Scores](https://github.com/user-attachments/assets/51113648-c78a-4435-a21f-6ba823d677a7)
 
 #### b. Actual vs Predicted
 Biểu đồ phân tán giữa giá thực tế và giá dự đoán. Các điểm tập trung quanh đường chéo đỏ ($y=x$) cho thấy độ chính xác khá tốt, tuy nhiên mô hình có xu hướng dự đoán thấp hơn thực tế ở phân khúc giá rất cao (luxury).
-![Actual vs Predicted](https://github.com/user-attachments/assets/b487f265-cc7f-4569-bba0-bf6caebe14ce)
+![Actual vs Predicted](https://github.com/user-attachments/assets/a8467748-48d7-4d44-933c-4e896d531a01)
 
 #### c. Residuals Analysis
 Phân phối của phần dư (Residuals) gần chuẩn (Normal distribution) và tập trung quanh 0, cho thấy mô hình không bị bias lớn.
-![Residuals](https://github.com/user-attachments/assets/b24f9641-6710-4274-b1d1-db430658c90c)
+![Residuals](https://github.com/user-attachments/assets/093617d2-fe72-4bdf-b19f-f790a976884e)
 
 #### d. Feature Importance
 Các yếu tố ảnh hưởng mạnh nhất đến giá phòng.
 - **Tăng giá:** Entire home/apt, Manhattan, các khu vực đắt đỏ.
 - **Giảm giá:** Shared room, Bronx, các khu vực xa trung tâm.
-![Feature Importance](https://github.com/user-attachments/assets/7740c7e8-a43f-4cf6-a8cc-b1f17e26386d)
+![Feature Importance](https://github.com/user-attachments/assets/5798493d-649e-4207-a3d1-a0dadee32acd)
 
 ### 3. So sánh và phân tích
 
