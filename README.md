@@ -155,6 +155,42 @@ Where:
 - Use vectorization to calculate predictions $\hat{y}$ and residuals $r = y - \hat{y}$.
 - Update weights iteratively until convergence (error change is smaller than threshold `tol`).
 
+### 3. Evaluation Metrics
+
+To evaluate the performance of the models, we implement the following metrics from scratch:
+
+#### a. Mean Absolute Error (MAE)
+Measures the average magnitude of errors in a set of predictions, without considering their direction.
+$$ MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i| $$
+
+**Implementation:**
+```python
+def mean_absolute_error(y_true, y_pred):
+    return np.mean(np.abs(y_true - y_pred))
+```
+
+#### b. Root Mean Squared Error (RMSE)
+The square root of the average of squared differences between prediction and actual observation. It penalizes larger errors more than MAE.
+$$ RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2} $$
+
+**Implementation:**
+```python
+def root_mean_squared_error(y_true, y_pred):
+    return np.sqrt(np.mean((y_true - y_pred)**2))
+```
+
+#### c. R-squared (R²)
+Represents the proportion of the variance for a dependent variable that's explained by an independent variable or variables in a regression model.
+$$ R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2} $$
+
+**Implementation:**
+```python
+def r2_score(y_true, y_pred):
+    ss_res = np.sum((y_true - y_pred)**2)
+    ss_tot = np.sum((y_true - np.mean(y_true))**2)
+    return 1 - (ss_res / ss_tot)
+```
+
 ---
 
 ## ⚙️ Installation & Setup
